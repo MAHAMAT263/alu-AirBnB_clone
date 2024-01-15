@@ -12,9 +12,9 @@ class BaseModel:
         class_name = self.__class__.__name__
         dict_representation = self.__dict__.copy()
         dict_representation['__class__'] = class_name
-        dict_representation['created_at'] = self.created_at_isoformat()
-        dict_representation['uodated_at'] = self.updated_at.isofprmat()
+        dict_representation['created_at'] = self.created_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
+        dict_representation['uodated_at'] = self.updated_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
         return dict_representation
     def __str__(self):
         class_name = self.__class__.__name__
-        return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
+g       return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
