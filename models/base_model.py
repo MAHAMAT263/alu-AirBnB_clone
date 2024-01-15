@@ -15,8 +15,6 @@ class BaseModel:
         dict_representation['created_at'] = self.created_at_isoformat()
         dict_representation['uodated_at'] = self.updated_at.isofprmat()
         return dict_representation
-
-
-def __str__(self):
-    class_name = self.__class__.__name__
-    return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
+    def __str__(self):
+        class_name = self.__class__.__name__
+        return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
