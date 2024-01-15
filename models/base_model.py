@@ -18,3 +18,13 @@ class BaseModel:
     def __str__(self):
         class_name = self.__class__.__name__
         return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
+if __name__ == "__main__":
+    bm1 = BaseModel()
+    bm2 = BaseModel(**bm1.to_dict())
+
+    # Print the results for verification
+    print(bm1)
+    print(bm2)
+
+    # Check if bm1 and bm2 have the same attributes
+    print(bm1.__dict__ == bm2.__dict__)
