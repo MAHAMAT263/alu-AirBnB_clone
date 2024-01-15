@@ -9,6 +9,8 @@ class BaseModel:
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
     def save(self):
+        self.updated_at = datetime.now()
+    def to_dict(self):
         class_name = self.__class__.__name__
         dict_representation = self.__dict__.copy()
         dict_representation['__class__'] = class_name
