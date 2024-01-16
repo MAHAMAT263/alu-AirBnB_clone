@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 import json
-from models.base_model import BaseModel  # Ensure correct import statement
 from datetime import datetime
 
 class FileStorage:
@@ -29,7 +28,9 @@ class FileStorage:
 
             for key, value in data.items():
                 class_name, obj_id = key.split('.')
-                obj = eval(class_name)(**value)
+                # Use globals() to get the class by its name as a string
+                obj_class = globals()[class_name]
+                obj = obj_class(**value)
                 self.__objects[key] = obj
 
         except FileNotFoundError:
