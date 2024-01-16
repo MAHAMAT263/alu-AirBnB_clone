@@ -1,12 +1,10 @@
 #!/usr/bin/python3
+from models import storage
 import uuid
 from datetime import datetime
-#Write a class BaseModel that defines all common attributes/methods for other classes
 
 class BaseModel:
-
     def __init__(self, *args, **kwargs):
-
         if kwargs:
             for key, value in kwargs.items():
                 if key != '__class__':
@@ -18,8 +16,12 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            storage.new(self)
+
     def save(self):
         self.updated_at = datetime.now()
+        storage.save()
+
     def to_dict(self):
         class_name = self.__class__.__name__
         dict_representation = self.__dict__.copy()
@@ -27,6 +29,7 @@ class BaseModel:
         dict_representation['created_at'] = self.created_at.isoformat()
         dict_representation['updated_at'] = self.updated_at.isoformat()
         return dict_representation
+
     def __str__(self):
         class_name = self.__class__.__name__
         return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
