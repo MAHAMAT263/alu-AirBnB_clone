@@ -25,8 +25,13 @@ class FileStorage:
         if path.exists(self.__file_path):
             with open(self.__file_path, 'r', encoding='utf-8') as file:
                 serialized_objects = json.load(file)
-                
+
                 for key, value in serialized_objects.items():
                     class_name, obj_id = key.split('.')
-                    class_obj = globals()[class_name]
+                    if class_name == 'BaseModel':
+                        class_obj = BaseModel
+                    # Add similar conditions for other classes if needed
+                    else:
+                        raise ValueError(f"Unknown class: {class_name}")
+
                     self.__objects[key] = class_obj(**value)
