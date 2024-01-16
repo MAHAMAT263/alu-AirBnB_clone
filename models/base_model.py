@@ -5,6 +5,9 @@ from datetime import datetime
 
 class BaseModel:
     def __init__(self, *args, **kwargs):
+        self.id = str(uuid.uuid4())
+
+    def __init__(self, *args, **kwargs):
         if kwargs:
             for key, value in kwargs.items():
                 if key != "__class__":
