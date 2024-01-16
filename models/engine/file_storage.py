@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-from models.base_model import BaseModel
+import uuid
+from datetime import datetime
 import json
 
 class FileStorage:
