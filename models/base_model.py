@@ -20,16 +20,3 @@ class BaseModel:
     def __str__(self):
         class_name = self.__class__.__name__
         return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
-
-if __name__ == "__main__":
-    bm = BaseModel()
-
-    # Test the to_dict method
-    d_json = bm.to_dict()
-    print(type(d_json['created_at']))
-    print(type(d_json['updated_at']))
-    print(type(d_json['__class__']))
-    print(type(d_json))
-
-    # Check the __str__ method
-    print(bm)
