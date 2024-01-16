@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 import json
-from models.base_models import BaseModel
+
 class FileStorage:
+    from models.base_model import BaseModel
     __file_path = "file.json"
     __objects = {}
 
