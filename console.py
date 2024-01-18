@@ -52,8 +52,9 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, arg):
-        # ... Existing code ...
-        elif args[0] not in {"BaseModel", "User"}:
+
+        #do_creat code
+        if args[0] not in {"BaseModel", "User"}:
             print("** class doesn't exist **")
         else:
             if args[0] == "User":
@@ -64,7 +65,7 @@ class HBNBCommand(cmd.Cmd):
             print(new_instance.id)
 
     def do_show(self, arg):
-        # ... Existing code ...
+        # do_show
             if args[0] not in {"BaseModel", "User"}:
                 print("** class doesn't exist **")
             elif len(args) == 1:
@@ -79,7 +80,7 @@ class HBNBCommand(cmd.Cmd):
                     print(instance)
 
     def do_destroy(self, arg):
-        # ... Existing code ...
+        # do_destroycode ...
             if args[0] not in {"BaseModel", "User"}:
                 print("** class doesn't exist **")
             elif len(args) == 1:
@@ -95,14 +96,14 @@ class HBNBCommand(cmd.Cmd):
                     storage.save()
 
     def do_all(self, arg):
-        # ... Existing code ...
+        # do_all code ...
             elif args[0] not in {"BaseModel", "User"}:
                 print("** class doesn't exist **")
             else:
                 print([str(obj) for key, obj in all_objects.items() if args[0] in key])
 
     def do_update(self, arg):
-        # ... Existing code ...
+        # do_update code ...
             if args[0] not in {"BaseModel", "User"}:
                 print("** class doesn't exist **")
             elif len(args) == 1:
