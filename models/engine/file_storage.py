@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import json
 import os
+from models.base_model import BaseModel  # Add this import statement
 
 class FileStorage:
     __file_path = "file.json"
@@ -35,6 +36,9 @@ class FileStorage:
                 data = json.load(file)
                 for key, obj_dict in data.items():
                     class_name, obj_id = key.split('.')
-                    # Assuming you have a method from_dict in your classes to create an instance from a dictionary
-                    obj = globals()[class_name].from_dict(obj_dict)
+                    # Import the class dynamically using globals() and locals()
+                    module = __import__('models.' + class_name, globals(), locals(), [class_name], 0)
+                    class_ = getattr(module, class_name)
+                    # Create an instance from the dictionary representation
+                    obj = class_.from_dict(obj_dict)
                     self.__objects[key] = obj
