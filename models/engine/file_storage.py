@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import json
 import os
-from models.base_model import BaseModel  # Add this import statement
+from models.base_model import BaseModel
 
 class FileStorage:
     __file_path = "file.json"
@@ -37,7 +37,7 @@ class FileStorage:
             for key, obj_dict in data.items():
                 class_name, obj_id = key.split('.')
                 # Import the class dynamically using importlib
-                from importlib import import_module
+                from models.base_model import BaseModel
                 module = import_module('models.' + class_name)
                 class_ = getattr(module, class_name)
                 # Create an instance from the dictionary representation
