@@ -1,7 +1,12 @@
 #!/usr/bin/python3
+""" the console part """
 import cmd
 
 class HBNBCommand(cmd.Cmd):
+     """
+    This is the HBNBCommand class for the command interpreter.
+    It inherits from cmd.Cmd and provides specific commands.
+    """
     
     prompt = "(hbnb)"
 
