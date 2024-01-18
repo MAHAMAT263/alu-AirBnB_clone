@@ -25,8 +25,10 @@ class FileStorage:
                 data = json.load(file)
                 for key, obj_dict in data.items():
                     class_name, obj_id = key.split('.')
+                    # Import the class dynamically to avoid NameError
+                    model_class = globals()[class_name]
                     obj_dict['__class__'] = class_name
-                    obj = eval(class_name)(**obj_dict)
+                    obj = model_class(**obj_dict)
                     self.new(obj)
         except FileNotFoundError:
             pass
