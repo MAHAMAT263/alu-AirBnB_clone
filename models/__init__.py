@@ -1,6 +1,8 @@
 #!/usr/bin/python3
+"__init___ meth"
 from models.engine.file_storage import FileStorage
-from models.base_model import BaseModel  # Import BaseModel here
 
+#Create a FileStorage
 storage = FileStorage()
+#Call reload() 
 storage.reload()
