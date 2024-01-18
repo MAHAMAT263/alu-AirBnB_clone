@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import json
+from models.base_model import BaseModel  # Import BaseModel here
 
 class FileStorage:
     __file_path = "file.json"
@@ -25,10 +26,10 @@ class FileStorage:
                 data = json.load(file)
                 for key, obj_dict in data.items():
                     class_name, obj_id = key.split('.')
-                    # Import the class dynamically to avoid NameError
-                    model_class = globals()[class_name]
+                    # Import BaseModel dynamically to avoid NameError
+                    from models.base_model import BaseModel
                     obj_dict['__class__'] = class_name
-                    obj = model_class(**obj_dict)
+                    obj = BaseModel(**obj_dict)
                     self.new(obj)
         except FileNotFoundError:
             pass
