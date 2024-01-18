@@ -98,14 +98,6 @@ class HBNBCommand(cmd.Cmd):
                 del all_objects[key]
                 storage.save()
 
-if __name__ == '__main__':
-    # Check if the file 'file.json' exists, and create it if not
-    file_path = "file.json"
-    if not os.path.exists(file_path):
-        with open(file_path, "w") as file:
-            file.write("")
-
-    HBNBCommand().cmdloop()
     def do_all(self, args):
         # do_all code ...
             if args[0] not in {"BaseModel", "User"}:
