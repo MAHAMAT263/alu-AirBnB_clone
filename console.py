@@ -51,7 +51,7 @@ class HBNBCommand(cmd.Cmd):
         """Do nothing on an empty line + ENTER."""
         pass
 
-    def do_create(self, arg):
+    def do_create(self, args):
 
         #do_creat code
         if args[0] not in {"BaseModel", "User"}:
@@ -64,7 +64,7 @@ class HBNBCommand(cmd.Cmd):
             new_instance.save()
             print(new_instance.id)
 
-    def do_show(self, arg):
+    def do_show(self, args):
         # do_show
             if args[0] not in {"BaseModel", "User"}:
                 print("** class doesn't exist **")
@@ -79,7 +79,7 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     print(instance)
 
-    def do_destroy(self, arg):
+    def do_destroy(self, args):
         # do_destroycode ...
             if args[0] not in {"BaseModel", "User"}:
                 print("** class doesn't exist **")
@@ -95,14 +95,14 @@ class HBNBCommand(cmd.Cmd):
                     del all_objects[key]
                     storage.save()
 
-    def do_all(self, arg):
+    def do_all(self, args):
         # do_all code ...
             if args[0] not in {"BaseModel", "User"}:
                 print("** class doesn't exist **")
             else:
                 print([str(obj) for key, obj in all_objects.items() if args[0] in key])
 
-    def do_update(self, arg):
+    def do_update(self, args):
         # do_update code ...
             if args[0] not in {"BaseModel", "User"}:
                 print("** class doesn't exist **")
