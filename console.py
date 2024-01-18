@@ -81,29 +81,28 @@ class HBNBCommand(cmd.Cmd):
                     print(instance)
 
     def do_destroy(self, args):
-        """Usage: to destroy <class> <id> or <class>.destroy(<id>)
-        Delete class instance of given id."""
-        arg_list = args.split()
-        all_objects = storage.all()
-        if len(arg_list) == 0:
+        """Deletes an instance based on the class name and id"""
+        if not args:
             print("** class name missing **")
-            return
-        class_name = arg_list[0]
-        if class_name not in self.__all_classes:
+        elif args[0] not in {"BaseModel", "User"}:
             print("** class doesn't exist **")
-            return
-        if len(arg_list) == 1:
+        elif len(args) == 1:
             print("** instance id missing **")
-            return
-        instance_id = arg_list[1]
-
-        object_key = "{}.{}".format(class_name, instance_id)
-
-        if object_key not in all_objects.keys():
-            print("** no instance found **")
         else:
-            del all_objects[object_key]
-            storage.save()
+            key = "{}.{}".format(args[0], args[1])
+            file_path = "file.json"
+
+            if not os.path.exists(file_path):
+                print("Error: 'file.json' not found.")
+                return
+
+            all_objects = storage.all()
+            instance = all_objects.get(key)
+            if instance is None:
+                print("** no instance found **")
+            else:
+                del all_objects[key]
+                storage.save()
 
     def do_all(self, args):
         # do_all code ...
