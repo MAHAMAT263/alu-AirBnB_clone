@@ -97,7 +97,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         # do_all code ...
-            elif args[0] not in {"BaseModel", "User"}:
+            if args[0] not in {"BaseModel", "User"}:
                 print("** class doesn't exist **")
             else:
                 print([str(obj) for key, obj in all_objects.items() if args[0] in key])
