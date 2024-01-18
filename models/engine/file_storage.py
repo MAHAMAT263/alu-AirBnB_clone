@@ -36,8 +36,6 @@ class FileStorage:
             data = json.load(file)
             for key, obj_dict in data.items():
                 class_name, obj_id = key.split('.')
-                # Import the class dynamically using importlib
-                from models.base_model import BaseModel
                 module = import_module('models.' + class_name)
                 class_ = getattr(module, class_name)
                 # Create an instance from the dictionary representation
