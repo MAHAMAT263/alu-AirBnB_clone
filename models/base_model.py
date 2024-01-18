@@ -22,7 +22,7 @@ class BaseModel:
 
     def save(self):
         self.updated_at = datetime.now()
-        storage.save()
+        models.storage.save()
 
     def to_dict(self):
         obj_dict = {'__class__': self.__class__.__name__}
