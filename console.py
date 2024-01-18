@@ -91,9 +91,9 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         else:
             key = "{}.{}".format(args[0], args[1])
-            file_path = "file.json"
+            __file_path = "file.json"
 
-            if not os.path.exists(file_path):
+            if not os.path.exists(__file_path):
                 print("Error: 'file.json' not found.")
                 return
 
