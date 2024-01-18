@@ -2,7 +2,14 @@
 import json
 from models.base_model import BaseModel
 
+
 class FileStorage:
+
+    CLASSES = {
+    'BaseModel': BaseModel,
+    'User': User,
+    }
+
     __file_path = "file.json"
     __objects = {}
 
