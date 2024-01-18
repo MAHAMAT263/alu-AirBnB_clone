@@ -26,19 +26,20 @@ class FileStorage:
             json.dump(serialized_objects, file)
 
     def reload(self):
-        """
-        Deserializes the JSON file to __objects
-        (only if the JSON file (__file_path) exists; otherwise, do nothing).
-        If the file doesn’t exist, no exception should be raised.
-        """
-        if os.path.exists(self.__file_path):
-            with open(self.__file_path, 'r') as file:
-                data = json.load(file)
-                for key, obj_dict in data.items():
-                    class_name, obj_id = key.split('.')
-                    # Import the class dynamically using globals() and locals()
-                    module = __import__('models.' + class_name, globals(), locals(), [class_name], 0)
-                    class_ = getattr(module, class_name)
-                    # Create an instance from the dictionary representation
-                    obj = class_.from_dict(obj_dict)
-                    self.__objects[key] = obj
+    """
+    Deserializes the JSON file to __objects
+    (only if the JSON file (__file_path) exists; otherwise, do nothing).
+    If the file doesn’t exist, no exception should be raised.
+    """
+    if os.path.exists(self.__file_path):
+        with open(self.__file_path, 'r') as file:
+            data = json.load(file)
+            for key, obj_dict in data.items():
+                class_name, obj_id = key.split('.')
+                # Import the class dynamically using importlib
+                from importlib import import_module
+                module = import_module('models.' + class_name)
+                class_ = getattr(module, class_name)
+                # Create an instance from the dictionary representation
+                obj = class_.from_dict(obj_dict)
+                self.__objects[key] = obj
