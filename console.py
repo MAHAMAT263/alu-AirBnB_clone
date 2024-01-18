@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Console module"""
 
+import json
 import cmd
 import shlex
 from models.base_model import BaseModel
@@ -80,21 +81,31 @@ class HBNBCommand(cmd.Cmd):
                     print(instance)
 
     def do_destroy(self, args):
-        # do_destroycode ...
-            if args[0] not in {"BaseModel", "User"}:
-                print("** class doesn't exist **")
-            elif len(args) == 1:
-                print("** instance id missing **")
+        """Deletes an instance based on the class name and id"""
+        if not args:
+            print("** class name missing **")
+        elif args[0] not in {"BaseModel", "User"}:
+            print("** class doesn't exist **")
+        elif len(args) == 1:
+            print("** instance id missing **")
+        else:
+            key = "{}.{}".format(args[0], args[1])
+            all_objects = storage.all()
+            instance = all_objects.get(key)
+            if instance is None:
+                print("** no instance found **")
             else:
-                key = "{}.{}".format(args[0], args[1])
-                all_objects = storage.all()
-                instance = all_objects.get(key)
-                if instance is None:
-                    print("** no instance found **")
-                else:
-                    del all_objects[key]
-                    storage.save()
+                del all_objects[key]
+                storage.save()
 
+if __name__ == '__main__':
+    # Check if the file 'file.json' exists, and create it if not
+    file_path = "file.json"
+    if not os.path.exists(file_path):
+        with open(file_path, "w") as file:
+            file.write("")
+
+    HBNBCommand().cmdloop()
     def do_all(self, args):
         # do_all code ...
             if args[0] not in {"BaseModel", "User"}:
