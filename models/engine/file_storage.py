@@ -20,6 +20,8 @@ class FileStorage:
         key = "{}.{}".format(obj.__class__.__name__, obj.id)
         self.__objects[key] = obj
 
+        self.save()
+
     def save(self):
         serialized_objects = {}
         for key, obj in self.__objects.items():
