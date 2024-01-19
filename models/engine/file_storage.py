@@ -19,7 +19,7 @@ class FileStorage:
     def new(self, obj):
         key = "{}.{}".format(obj.__class__.__name__, obj.id)
         self.__objects[key] = obj
-
+        print("Adding new instance with key:", key)
         self.save()
 
     def save(self):
