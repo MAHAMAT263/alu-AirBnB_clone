@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import json
 from models.base_model import BaseModel
-
+from models.user import User
 
 class FileStorage:
     __file_path = "file.json"
@@ -26,13 +26,14 @@ class FileStorage:
 
     def reload(self):
         """Deserializes the JSON file (__file_path) to __objects."""
-        from models.base_model import BaseModel
-        from models.user import User
         try:
             with open(self.__file_path, 'r') as file:
                 data = json.load(file)
-                for item in data.values():
-                    class_name = item['__class__']
-                    self.new(eval(class_name + "(**" + str(item) + ")"))
+                for item_key, item_value in data.items():
+                    class_name = item_value['__class__']
+                    # Use globals() to access the class by name
+                    model_class = globals()[class_name]
+                    instance = model_class(**item_value)
+                    self.new(instance)
         except FileNotFoundError:
-            pass
+            pass     
