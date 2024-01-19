@@ -109,11 +109,14 @@ class HBNBCommand(cmd.Cmd):
                 self.save()
 
     def do_all(self, args):
-        # do_all code
-            if args[0] not in {"BaseModel", "User"}:
-                print("** class doesn't exist **")
-            else:
-                print([str(obj) for key, obj in all_objects.items() if args[0] in key])
+        """Prints all string representations of instances based on the class name"""
+        all_objects = storage.all()
+
+        if not args or args[0] not in {"BaseModel", "User"}:
+            print("** class doesn't exist **")
+        else:
+            print([str(obj) for key, obj in all_objects.items() if args[0] in key])
+
 
     def do_update(self, args):
         if args[0] not in {"BaseModel", "User"}:
