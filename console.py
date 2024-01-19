@@ -91,19 +91,18 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         else:
             key = "{}.{}".format(args[0], args[1])
-            __file_path = "file.json"
 
-            if not os.path.exists(__file_path):
+            if not os.path.exists(self.__file_path):
                 print("Error: 'file.json' not found.")
                 return
 
-            all_objects = storage.all()
+            all_objects = self.__objects
             instance = all_objects.get(key)
             if instance is None:
                 print("** no instance found **")
             else:
                 del all_objects[key]
-                storage.save()
+                self.save()
 
     def do_all(self, args):
         # do_all code ...
