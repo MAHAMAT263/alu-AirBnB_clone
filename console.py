@@ -10,6 +10,10 @@ from models import storage
 from models.user import User
 
 class HBNBCommand(cmd.Cmd):
+
+    CLASSES = {
+    'BaseModel': BaseModel,
+    'User': User,}
     """
     This is the HBNBCommand class for the command interpreter.
     It inherits from cmd.Cmd and provides specific commands.
