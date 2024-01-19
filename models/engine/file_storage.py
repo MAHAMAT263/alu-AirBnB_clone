@@ -17,25 +17,26 @@ class FileStorage:
     def new(self, obj):
         key = "{}.{}".format(obj.__class__.__name__, obj.id)
         self.__objects[key] = obj
-        self.save()
+        self.save(obj)
     def save(self):
         serialized_objects = {}
         for key, obj in self.__objects.items():
             serialized_objects[key] = obj.to_dict()
         with open(self.__file_path, 'w', encoding='utf-8') as file:
             json.dump(serialized_objects, file)
-
-    def reload(self):
+    def reload(self, obj):
         try:
             with open(self.__file_path, 'r', encoding='utf-8') as file:
                 data = json.load(file)
                 for key, obj_dict in data.items():
-                    class_name, obj_id = key.split('.')
-                    # Import the class dynamically to avoid NameError
-                    model_class = globals()[class_name]
-                    obj_dict['__class__'] = class_name
-                    obj = model_class(**obj_dict)
-                    self.new(obj)
+                    class_name = obj_dict['__class__']
+                    if class_name in CLASSES:
+                        obj = CLASSES[class_name](**obj_dict)
+                        self.__objects[key] = obj
+        except FileNotFoundError:
+            pass
+
+
         except FileNotFoundError:
             with open(self.__file_path, 'w', encoding='utf-8') as file:
                 file.write('{}')
