@@ -33,6 +33,6 @@ class FileStorage:
                     model_class = globals()[class_name]
                     instance = model_class(**item_value)
                     self.new(instance)
-        except FileNotFoundError:
+        except (FileNotFoundError, json.JSONDecodeError):
             with open(self.__file_path, 'w') as file:
-                file.write("{}")     
+                file.write("{}")
