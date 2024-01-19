@@ -44,11 +44,15 @@ class BaseModel:
     updates the public instance attribute
     updated_at with the current datetime"""
     def save(self):
-        self.updated_at = datetime.now()
-        models.storage.save()
-
-    """to_dict(self): returns a dictionary containing all keys/values
-    of __dict__ of the instance:"""
+        try:
+            data = {}
+            for key, obj in self.__objects.items():
+                data[key] = obj.to_dict()
+                with open(self.__file_path, 'w') as file:
+                    json.dump(data, file)
+                    print("Save successful.")
+        except Exception as e:
+            print(f"Save failed: {e}")
     def to_dict(self):
         obj_dict = self.__dict__.copy()
         obj_dict['__class__'] = self.__class__.__name__
