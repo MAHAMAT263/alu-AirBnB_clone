@@ -1,42 +1,38 @@
 #!/usr/bin/python3
 import json
 from models.base_model import BaseModel
-from models.user import User
+
 
 class FileStorage:
-    CLASSES = {
-    'BaseModel': BaseModel,
-    'User': User,}
-
     __file_path = "file.json"
     __objects = {}
 
     def all(self):
+        """Returns the dictionary __objects."""
         return self.__objects
 
     def new(self, obj):
-        key = "{}.{}".format(obj.__class__.__name__, obj.id)
+        """Sets in __objects the obj with key <obj class name>.id."""
+        key = f"{obj.__class__.__name__}.{obj.id}"
         self.__objects[key] = obj
-        self.save(obj)
+
     def save(self):
-        serialized_objects = {}
+        """Serializes __objects to the JSON file (__file_path)."""
+        data = {}
         for key, obj in self.__objects.items():
-            serialized_objects[key] = obj.to_dict()
-        with open(self.__file_path, 'w', encoding='utf-8') as file:
-            json.dump(serialized_objects, file)
-    def reload(self, obj):
+            data[key] = obj.to_dict()
+        with open(self.__file_path, 'w') as file:
+            json.dump(data, file)
+
+    def reload(self):
+        """Deserializes the JSON file (__file_path) to __objects."""
+        from models.base_model import BaseModel
+        from models.user import User
         try:
-            with open(self.__file_path, 'r', encoding='utf-8') as file:
+            with open(self.__file_path, 'r') as file:
                 data = json.load(file)
-                for key, obj_dict in data.items():
-                    class_name = obj_dict['__class__']
-                    if class_name in CLASSES:
-                        obj = CLASSES[class_name](**obj_dict)
-                        self.__objects[key] = obj
+                for item in data.values():
+                    class_name = item['__class__']
+                    self.new(eval(class_name + "(**" + str(item) + ")"))
         except FileNotFoundError:
             pass
-
-
-        except FileNotFoundError:
-            with open(self.__file_path, 'w', encoding='utf-8') as file:
-                file.write('{}')
