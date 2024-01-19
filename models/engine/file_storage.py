@@ -4,11 +4,9 @@ from models.base_model import BaseModel
 from models.user import User
 
 class FileStorage:
-
     CLASSES = {
     'BaseModel': BaseModel,
-    'User': User,
-    }
+    'User': User,}
 
     __file_path = "file.json"
     __objects = {}
@@ -19,9 +17,7 @@ class FileStorage:
     def new(self, obj):
         key = "{}.{}".format(obj.__class__.__name__, obj.id)
         self.__objects[key] = obj
-        print("Adding new instance with key:", key)
-        self.save()
-
+        self.save
     def save(self):
         serialized_objects = {}
         for key, obj in self.__objects.items():
