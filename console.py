@@ -116,24 +116,32 @@ class HBNBCommand(cmd.Cmd):
                 print([str(obj) for key, obj in all_objects.items() if args[0] in key])
 
     def do_update(self, args):
-        # do_update code ...
-            if args[0] not in {"BaseModel", "User"}:
-                print("** class doesn't exist **")
-            elif len(args) == 1:
-                print("** instance id missing **")
+    """Updates an instance based on the class name and id"""
+    if not args:
+        print("** class name missing **")
+    elif args[0] not in {"BaseModel", "User"}:
+        print("** class doesn't exist **")
+    elif len(args) == 1:
+        print("** instance id missing **")
+    else:
+        key = "{}.{}".format(args[0], args[1])
+        all_objects = storage.all()
+        instance = all_objects.get(key)
+        if instance is None:
+            print("** no instance found **")
+        elif len(args) == 2:
+            print("** attribute name missing **")
+        elif len(args) == 3:
+            print("** value missing **")
+        else:
+            attribute_name = args[2]
+            attribute_value = args[3]
+            if hasattr(instance, attribute_name):
+                # Assume the attribute type is valid for simplicity
+                setattr(instance, attribute_name, attribute_value)
+                storage.save()
             else:
-                key = "{}.{}".format(args[0], args[1])
-                all_objects = storage.all()
-                instance = all_objects.get(key)
-                if instance is None:
-                    print("** no instance found **")
-                elif len(args) == 2:
-                    print("** attribute name missing **")
-                elif len(args) == 3:
-                    print("** value missing **")
-                else:
-                    setattr(instance, args[2], args[3])
-                    instance.save()
+                print("** attribute doesn't exist **")
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
