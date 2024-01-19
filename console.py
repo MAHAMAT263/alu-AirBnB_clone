@@ -53,7 +53,7 @@ class HBNBCommand(cmd.Cmd):
         """Help message for the EOF command."""
         print("Exits the program when End of File is reached")
 
-    def emptyline(self):
+    def do_emptyline(self):
         """Do nothing on an empty line + ENTER."""
         pass
 
