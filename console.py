@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Console module"""
-
+import os
 import json
 import cmd
 import shlex

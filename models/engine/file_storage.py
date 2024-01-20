@@ -33,6 +33,6 @@ class FileStorage:
                 data = json.load(file)
                 for item in data.values():
                     class_name = item['__class__']
-                    self.new(eval(class_name + "(**" + str(item) + ")"))
+                    self.new(globals()[class_name](**item))
         except FileNotFoundError:
             pass
