@@ -80,5 +80,5 @@ python3 unittest -m tests/test_console.py
 
 ## Authors :black_nib:
 
-* **Willie Bless Daniels** <[Mahamat Ahmat](https://github.com/MAHAMAT263)> <mahamat.ahmat@alustudent.com>
+* **Mahamat Ahmat** <[https://github.com/MAHAMAT263](https://github.com/MAHAMAT263)> <mahamat.ahmat@alustudent.com>
 * **Wilson MUNYANEZA** <[] ()> <w.munyaneza@alustudent.com>
