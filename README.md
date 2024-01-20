@@ -2,8 +2,6 @@
 
 Enterprise Web-Development
 
-![hbnb_logo](https://github-production-user-asset-6210df.s3.amazonaws.com/125483758/296554473-4d09e883-3934-4f8e-86a1-a495a34bb34a.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20240120%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240120T121040Z&X-Amz-Expires=300&X-Amz-Signature=2daf41ae4fd88fae6cb99255de2f3059ee8ef70e1b7327c05c9118bd519889b3&X-Amz-SignedHeaders=host&actor_id=127387354&key_id=0&repo_id=742815829)
-
 <h1 (align="center")>Alu-AirBnB</h1>
 <p [align="center"]>An AirBnB clone</p>
 
@@ -82,5 +80,5 @@ python3 unittest -m tests/test_console.py
 
 ## Authors :black_nib:
 
-* **Willie Bless Daniels** <[Williedaniels](https://github.com/MAHAMAT263)> <mahamat.ahmat@alustudent.com>
+* **Willie Bless Daniels** <[Mahamat Ahmat](https://github.com/MAHAMAT263)> <mahamat.ahmat@alustudent.com>
 * **Wilson MUNYANEZA** <[] ()> <w.munyaneza@alustudent.com>
